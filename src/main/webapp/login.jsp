@@ -13,17 +13,13 @@
 </head>
 <body>
 	<div id="centerdiv" name="centerdiv" class="container">
-		<form id="login" name="login" >
+		<form id="login" name="login" action="login" method="post">
 			<label for="username">User name:</label><br>
-			<input type="text" id="username" name="username"><br>
+			<input type="text" id="username" name="username" autocomplete="off"><br>
 			<label for="password">Password:</label><br>
-			<input type="text" id="password" name="username"><br>
-		</form>
-	<div id="submitdiv" name="submitdiv" style="margin-top: 10px; margin-bottom: 10px">
-		<form id="submitform" name="submitform">
+			<input type="password" id="password" name="username" autocomplete="off"><br><br>
 			<input type="submit" value="Submit" id="submitButton">
 		</form>
-	</div>
 	<div>
 	<a href="createuser.jsp">New user? Create account here.</a>
 	</div>

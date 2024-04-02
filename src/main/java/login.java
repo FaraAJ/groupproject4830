@@ -35,8 +35,17 @@ public class login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		// TODO actually make login check for correctness 
+		
+		if (request.getParameter("username").equals("admin")) {
+			response.getWriter().append("admin login!!");
+		}
+		else {
+			response.sendRedirect("login.jsp");
+			response.getWriter().append("invalide username/password");
+		}
+		
+
 	}
 
 }

@@ -7,6 +7,7 @@
 <title>Create user</title>
 </head>
 <body>
-
+	This is the Create User Page <br>
+	<a href="login.jsp">Go Back.</a>
 </body>
 </html>
