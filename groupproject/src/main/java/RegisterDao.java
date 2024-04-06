@@ -3,9 +3,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 public class RegisterDao {
-	private String dburl = "jdbc:mysql://localhost:3306/userdb";
-	private String dbuname = "root";
-	private String dbpassword = "mysql";
+	private String dburl = "jdbc:mysql://ec2-174-129-188-22.compute-1.amazonaws.com:3306/groupDB?useSSL=false&allowPublicKeyRetrieval=true";
+	private String dbuname = "bnokerremote";
+	private String dbpassword = "password";
 	private String dbdriver = "com.mysql.jdbc.Driver";
 	public void loadDriver(String dbDriver)
 	{
