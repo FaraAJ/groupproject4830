@@ -17,7 +17,7 @@
 			<label for="username">User name:</label><br>
 			<input type="text" id="username" name="username" autocomplete="off"><br>
 			<label for="password">Password:</label><br>
-			<input type="password" id="password" name="username" autocomplete="off"><br><br>
+			<input type="password" id="password" name="password" autocomplete="off"><br><br>
 			<input type="submit" value="Submit" id="submitButton">
 		</form>
 	<div>
