@@ -7,18 +7,18 @@
 <title>New User Registration</title>
 </head>
 <body>
- <form action="Register" method="post">
+ <form action="${pageContext.request.contextPath}/Register" method="post">
  <table>
 	 <tr>
 	 <td>User Name</td>
-	 <td><input type="text" name="username"></td> </tr>
+	 <td><input type="text" name="uname" autocomplete = "off"></td> </tr>
 	 <tr>
 	 <td>Password</td>
-	 <td><input type="password" name="password"></td>
+	 <td><input type="password" name="password" autocomplete = "off"></td>
 	 </tr>
 	 <tr>
 	 <td>Phone</td>
-	 <td><input type="text" name="phone"></td>
+	 <td><input type="text" name="phone" autocomplete = "off"></td>
 	 </tr>
 	 <tr>
 	 <td>Submit</td>

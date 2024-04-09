@@ -29,7 +29,7 @@ public class RegisterDao {
 	public String insert(Member members) {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
-		String sql = "insert into member values(?,?,?)";
+		String sql = "INSERT INTO users (name, password, phone) VALUES(?,?,?)";
 		String result="Data Entered Successfully";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
