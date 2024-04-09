@@ -5,26 +5,28 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>New User Registration</title>
+	<style>
+	.container {
+		text-align: center;
+	}
+	</style>
 </head>
 <body>
  <form action="${pageContext.request.contextPath}/Register" method="post">
- <table>
-	 <tr>
-	 <td>User Name</td>
-	 <td><input type="text" name="uname" autocomplete = "off"></td> </tr>
-	 <tr>
-	 <td>Password</td>
-	 <td><input type="password" name="password" autocomplete = "off"></td>
-	 </tr>
-	 <tr>
-	 <td>Phone</td>
-	 <td><input type="text" name="phone" autocomplete = "off"></td>
-	 </tr>
-	 <tr>
-	 <td>Submit</td>
-	 <td><input type="submit" value="register"></td>
-	 </tr>
- </table>
+ 
+ <div id="centerdiv" name="centerdiv" class="container">
+		<form id="register" name="register" action="register" method="post">
+			<label for="uname">User name:</label><br>
+			<input type="text" id="uname" name="uname" autocomplete="off"><br>
+			<label for="password">Password:</label><br>
+			<input type="password" id="password" name="password" autocomplete="off"><br>
+			<label for="password">Confirm Password:</label><br>
+			<input type="cpassword" id="cpassword" name="cpassword" autocomplete="off"><br>
+			<label for="phone">Phone Number:</label><br>
+			<input type="text" id="phone" name="phone" autocomplete="off"><br><br>
+			<input type="submit" value="Submit" id="submitButton">
+		</form>
+	</div>
  </form>
 </body>
 </html>
