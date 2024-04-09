@@ -29,10 +29,10 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name=request.getParameter("name");
+		String uname=request.getParameter("uname");
 		String password=request.getParameter("password");
 		String phone=request.getParameter("phone");
-		Member member=new Member(name, password, phone);
+		Member member=new Member(uname, password, phone);
 		RegisterDao rdao=new RegisterDao();
 		String result=rdao.insert(member);
 		response.getWriter().println(result);
