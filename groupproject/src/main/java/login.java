@@ -76,11 +76,17 @@ public class login extends HttpServlet {
 	    	  PreparedStatement prepState = connection.prepareStatement(sqlcommand);
 	    	  ResultSet rs = prepState.executeQuery();
 	    	  rs.next();
-	    	  System.out.println(sqlcommand);
-	    	  System.out.println(rs);
+	    	  String pword = rs.getString("password");
+	    	  String admin = rs.getString("is_admin");
 	    	  
-	    	  if (rs.getString("password").equals(request.getParameterValues("password")[0])) {
+	    	  if (pword.equals(request.getParameterValues("password")[0])) {
+	    		  if(Integer.parseInt(admin) == 1) {
+	    			  //TODO THIS NEEDS TO GO TO ADMIN PAGE
+	    			  response.sendRedirect("displayTable.jsp");
+	    		  }
+	    		  else {
 	    		  response.sendRedirect("displayTable.jsp");
+	    		  }
 	    	  }
 	    	  else {
 	    		  
