@@ -10,6 +10,16 @@
 		text-align: center;
 	}
 	</style>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		let url = new URL(window.location.href);
+		let params = new URLSearchParams(url.search);
+		if(params.get('invalid') == 'true'){
+			alert("Bad login! Please try again.");
+			}		
+	});
+	</script>
 </head>
 <body>
 	<div id="centerdiv" name="centerdiv" class="container">
@@ -20,7 +30,9 @@
 			<input type="password" id="password" name="password" autocomplete="off"><br><br>
 			<input type="submit" value="Submit" id="submitButton">
 		</form>
+
 	<div>
+	
 	<a href="createuser.jsp">New user? Create account here.</a>
 	</div>
 </div>
