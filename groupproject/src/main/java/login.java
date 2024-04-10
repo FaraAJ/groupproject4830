@@ -82,7 +82,7 @@ public class login extends HttpServlet {
 	    	  if (pword.equals(request.getParameterValues("password")[0])) {
 	    		  if(Integer.parseInt(admin) == 1) {
 	    			  //TODO THIS NEEDS TO GO TO ADMIN PAGE
-	    			  response.sendRedirect("displayTable.jsp");
+	    			  response.sendRedirect("Admin.jsp");
 	    		  }
 	    		  else {
 	    		  response.sendRedirect("displayTable.jsp");

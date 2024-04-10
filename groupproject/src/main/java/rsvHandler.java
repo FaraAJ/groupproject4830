@@ -83,7 +83,8 @@ public class rsvHandler extends HttpServlet {
 		String day = request.getParameter("days").trim();
 		String time = request.getParameter("times").trim();
 		System.out.println(day + " and " + time);
-		doGet(request, response);
+		//doGet(request, response);
+		response.getWriter().append("Day: "+ day + "<br>Time: "+ time+ "<br>");
 	}
 
 }

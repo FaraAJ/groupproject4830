@@ -36,6 +36,20 @@
 		}
 		.rsv input:checked + div {background: green;}
 	</style>
+	
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+       <script>
+           const ServletURL = "${pageContext.request.contextPath}/rsvHandler";
+           $(document).on("click", "#submitButton", function(event) {
+           	event.preventDefault();
+           	$.post(ServletURL,
+           			$("#inputForm").serialize(),
+           			function(responseText) {
+                   document.getElementById("inputForm").reset();
+           		$("#tableReturn").html(responseText);
+               });
+           });
+       </script>
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/rsvHandler" id="inputForm" method="POST">
@@ -54,6 +68,8 @@
 </div>
 <div id="tableList" style="float:right; margin-left: 10px; width:33%; text-align: center; border: 2px solid black">
 |Tables|
+	<div id="tableReturn" style="border: 2px solid black">
+	</div>
 </div>
 <div class="times" id="timeList" style="width:33%; text-align: center; margin: 0 auto; border: 2px solid black">
 |Time of Day|

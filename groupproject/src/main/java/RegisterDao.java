@@ -26,11 +26,10 @@ public class RegisterDao {
 		}
 		return con;
 	}
-	public String insert(Member members) {
+	public Boolean insert(Member members) {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
 		String sql = "INSERT INTO users (name, password, phone) VALUES(?,?,?)";
-		String result="Data Entered Successfully";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, members.getUname());
@@ -39,9 +38,9 @@ public class RegisterDao {
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			result="Data Not Entered Successfully";
 			e.printStackTrace();
+			return false;
 		}
-		return result;
+		return true;
 	}
 }

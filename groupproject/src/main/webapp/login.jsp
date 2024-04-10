@@ -17,7 +17,10 @@
 		let params = new URLSearchParams(url.search);
 		if(params.get('invalid') == 'true'){
 			alert("Bad login! Please try again.");
-			}		
+			}
+		if(params.get('accountmade') == 'true'){
+			alert("Account successfully made, you may now log in.");
+		}
 	});
 	</script>
 </head>
@@ -33,7 +36,7 @@
 
 	<div>
 	
-	<a href="createuser.jsp">New user? Create account here.</a>
+	<a href="memberRegister.jsp">New user? Create account here.</a>
 	</div>
 </div>
 </body>
