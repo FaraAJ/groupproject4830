@@ -34,8 +34,13 @@ public class Register extends HttpServlet {
 		String phone=request.getParameter("phone");
 		Member member=new Member(uname, password, phone);
 		RegisterDao rdao=new RegisterDao();
-		String result=rdao.insert(member);
-		response.getWriter().println(result);
+		Boolean result=rdao.insert(member);
+		if (result) {
+			response.sendRedirect("login.jsp?accountmade=true");
+		}
+		else {
+			response.getWriter().append("failed to make account");
+		}
 		
 		
 	}

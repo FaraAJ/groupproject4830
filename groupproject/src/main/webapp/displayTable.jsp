@@ -1,100 +1,98 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="java.sql.*, java.util.ArrayList" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Customer Reservation Table</title>
+<meta charset="ISO-8859-1">
+<title>Customer Reservation Table</title>
+	<style>
+		.days input {display: none;}
+		.days label {display: block;}
+		.days input + div {background: white;}
+		.days input + div label {
+			padding: 53px;
+			cursor: pointer;
+			border: 2px solid black;
+		}
+		.days input:checked + div {background: green;}
+		
+		.times input {display: none;}
+		.times label {display: block;}
+		.times input + div {background: white;}
+		.times input + div label {
+			padding: 29px;
+			cursor: pointer;
+			border: 2px solid black;
+		}
+		.times input:checked + div {background: green;}
+		
+		.rsv input {display:none;}
+		.rsv label {dispaly:block;}
+		.rsv input + div {background: white;}
+		.rsv input + div label {
+			padding: 20px;
+			cursor: pointer;
+			border: 2px solid black;
+		}
+		.rsv input:checked + div {background: green;}
+	</style>
+	
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+       <script>
+           const ServletURL = "${pageContext.request.contextPath}/rsvHandler";
+           $(document).on("click", "#submitButton", function(event) {
+           	event.preventDefault();
+           	$.post(ServletURL,
+           			$("#inputForm").serialize(),
+           			function(responseText) {
+                   document.getElementById("inputForm").reset();
+           		$("#tableReturn").html(responseText);
+               });
+           });
+       </script>
 </head>
 <body>
-<div id="dayList" style="float:left; margin-right: 10px; width:33%; text-align: center; border: 2px solid black">
-    |Day of the Week|
-    <form>
-        <% 
-        try {
-            String dburl = "jdbc:mysql://ec2-174-129-188-22.compute-1.amazonaws.com:3306/myDB?useSSL=false&allowPublicKeyRetrieval=true";
-            String user = "bnokerremote";
-            String password = "password";
-            String dbdriver = "com.mysql.jdbc.Driver";
-
-            Class.forName(dbdriver);
-            Connection con = DriverManager.getConnection(dburl, user, password);
-            Statement stmt = con.createStatement();
-
-            ResultSet rs = stmt.executeQuery("SELECT day FROM addTable");
-            
-            while (rs.next()) {
-                String day = rs.getString("day");
-                out.println("<input type='radio' id='" + day.toLowerCase() + "' name='day' value='" + day + "'>");
-                out.println("<div><label for='" + day.toLowerCase() + "'>" + day + "</label></div>");
-            }
-
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        %>
-    </form>
+<form action="${pageContext.request.contextPath}/rsvHandler" id="inputForm" method="POST">
+<div class="days" id="dayList" style="float:left; margin-right: 10px; width:33%; text-align: center; border: 2px solid black">
+|Day of the Week|
+		<input type="radio" id="monday" name="days" value="Monday">
+		<div><label for="monday">Monday</label></div>
+		<input type="radio" id="tuesday" name="days" value="Tuesday">
+		<div><label for="tuesday">Tuesday</label></div>
+		<input type="radio" id="wednesday" name="days" value="Wednesday">
+		<div><label for="wednesday">Wednesday</label></div>
+		<input type="radio" id="thursday" name="days" value="Thursday">
+		<div><label for="thursday">Thursday</label></div>
+		<input type="radio" id="friday" name="days" value="Friday">
+		<div><label for="friday">Friday</label></div>
 </div>
-
 <div id="tableList" style="float:right; margin-left: 10px; width:33%; text-align: center; border: 2px solid black">
-    |Tables|
-    <form>
-        <% 
-        try {
-            String dburl = "jdbc:mysql://ec2-174-129-188-22.compute-1.amazonaws.com:3306/myDB?useSSL=false&allowPublicKeyRetrieval=true";
-            String user = "bnokerremote";
-            String password = "password";
-            String dbdriver = "com.mysql.jdbc.Driver";
-
-            Class.forName(dbdriver);
-            Connection con = DriverManager.getConnection(dburl, user, password);
-            Statement stmt = con.createStatement();
-
-            ResultSet rs = stmt.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema = 'myDB' AND table_name != 'addTable'");
-            
-            while (rs.next()) {
-                String tableName = rs.getString("table_name");
-                out.println("<input type='checkbox' id='" + tableName.toLowerCase() + "' name='table' value='" + tableName + "'>");
-                out.println("<div><label for='" + tableName.toLowerCase() + "'>" + tableName + "</label></div>");
-            }
-
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        %>
-    </form>
+|Tables|
+	<div id="tableReturn" style="border: 2px solid black">
+	</div>
 </div>
-
-<div id="timeList" style="width:33%; text-align: center; margin: 0 auto; border: 2px solid black">
-    |Time of Day|
-    <select name="time">
-        <% 
-        try {
-            String dburl = "jdbc:mysql://ec2-174-129-188-22.compute-1.amazonaws.com:3306/myDB?useSSL=false&allowPublicKeyRetrieval=true";
-            String user = "bnokerremote";
-            String password = "password";
-            String dbdriver = "com.mysql.jdbc.Driver";
-
-            Class.forName(dbdriver);
-            Connection con = DriverManager.getConnection(dburl, user, password);
-            Statement stmt = con.createStatement();
-
-            ResultSet rs = stmt.executeQuery("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='addTable' AND COLUMN_NAME != 'day'");
-            
-            while (rs.next()) {
-                String timeSlot = rs.getString("COLUMN_NAME");
-                out.println("<option value='" + timeSlot + "'>" + timeSlot + "</option>");
-            }
-
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        %>
-    </select>
+<div class="times" id="timeList" style="width:33%; text-align: center; margin: 0 auto; border: 2px solid black">
+|Time of Day|
+		<input type="radio" id="0400" name="times" value="400">
+		<div><label for="0400">4:00-4:30</label></div>
+		<input type="radio" id="0430" name="times" value="430">
+		<div><label for="0430">4:30-5:00</label></div>
+		<input type="radio" id="0500" name="times" value="500">
+		<div><label for="0500">5:00-5:30</label></div>
+		<input type="radio" id="0530" name="times" value="530">
+		<div><label for="0530">5:30-6:00</label></div>
+		<input type="radio" id="0600" name="times" value="600">
+		<div><label for="0600">6:00-6:30</label></div>
+		<input type="radio" id="0630" name="times" value="630">
+		<div><label for="0630">6:30-7:00</label></div>
+		<input type="radio" id="0700" name="times" value="700">
+		<div><label for="0700">7:00-7:30</label></div>
+		<input type="radio" id="0730" name="times" value="730">
+		<div><label for="0730">7:30-8:00</label></div>
 </div>
-
-</body>
+<div style="float:right; bottom: 0; text-align: center; width: 100%; margin-top: 15px">
+		<input type="submit" value="Check Availability" id="submitButton">
+</div>
+</form>
+</body>	
 </html>
