@@ -56,6 +56,8 @@ public class AdminTable extends HttpServlet {
 	          e.printStackTrace();
 	          return;
 	       }
+	      
+	      
 		//if connection NOT = null, can be used for sql queries
 	      if (connection != null) {
 	    	  System.out.println("Connected to database successfully.<br>");
@@ -69,6 +71,8 @@ public class AdminTable extends HttpServlet {
 	    	  PreparedStatement prepState = connection.prepareStatement(sqlcommand);
 	    	  ResultSet rs = prepState.executeQuery();
 	    	  
+	    	  
+	    	  
 	    	  response.getWriter().append("<a href=\"AdminEdit.jsp\"><button>EDIT</button></a><br><br>");
 		      response.getWriter().append("<div style=\"white-space:pre\">");
 	    	  
@@ -80,11 +84,11 @@ public class AdminTable extends HttpServlet {
 		      response.getWriter().append(dashes + "+" + "<br>");
 		      response.getWriter().append("|     day      |     400     |     430     |     500     |     530     |     600      |     630     |     700     |     730     |" + "<br>");
 		      response.getWriter().append(dashes + "+" + "<br>");
-		    while(rs.next()) {
+		   while(rs.next()) {
 		    	
-		    	response.getWriter().append("| " + rs.getString("day") + " |    " + rs.getString("400") + "     |     " + rs.getString("430") + "     |     " + rs.getString("500") + "     |     " + rs.getString("530") + "     |     " + rs.getString("600") + "     |     " + rs.getString("630") + "     |     " + rs.getString("700") + "     |     " + rs.getString("730") + "     |     " + "<br>");
+			  response.getWriter().append("| " + rs.getString("day") + " |    " + rs.getString("400") + "     |     " + rs.getString("430") + "     |     " + rs.getString("500") + "     |     " + rs.getString("530") + "     |     " + rs.getString("600") + "     |     " + rs.getString("630") + "     |     " + rs.getString("700") + "     |     " + rs.getString("730") + "     |     " + "<br>");
 		    	
-		    	response.getWriter().append(dashes + "+" + "<br>");
+			  response.getWriter().append(dashes + "+" + "<br>");
 	    		
 			}
 		    
@@ -115,10 +119,46 @@ public class AdminTable extends HttpServlet {
 		String seven = request.getParameter("seven").trim();
 		String seven30 = request.getParameter("seven30").trim();
 		
-		try {
-			String sqlcommand = "INSERT INTO tabel1 (day, 400, 430, 500, 530, 600, 630, 700) VALUES ('" + Date + "', '" + four + "', '" + four30 + "', '" + five + "', '" + five30 + "', '" + six + "', '" + six30 + "', '" + seven + "', '" + seven30 + "', now())";
-			PreparedStatement prepState = connection.prepareStatement(sqlcommand);
-			int rs = prepState.executeUpdate();
+		String sqladd = "INSERT INTO tabel1 (day, 400, 430, 500, 530, 600, 630, 700, 730) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sqldelete = "DELETE FROM table1 WHERE day=?";
+		
+		try (Connection conn = DriverManager.getConnection(
+				"jdbc:mysql://ec2-174-129-188-22.compute-1.amazonaws.com:3306/myDB?useSSL=false&allowPublicKeyRetrieval=true", "bnokerremote", "password");
+             PreparedStatement preparedStatement = conn.prepareStatement(sqldelete)) {
+
+			preparedStatement.setString(1, Date);
+			
+			int col = preparedStatement.executeUpdate();
+
+			System.out.println(col);
+			
+			preparedStatement.close();
+			
+		} catch (SQLException e) {
+	    	  response.getWriter().println("SQL Exception occured. <br><br>");
+	    	  e.printStackTrace();
+	      }
+		
+		try (Connection conn = DriverManager.getConnection(
+				"jdbc:mysql://ec2-174-129-188-22.compute-1.amazonaws.com:3306/myDB?useSSL=false&allowPublicKeyRetrieval=true", "bnokerremote", "password");
+			PreparedStatement preparedStatement = conn.prepareStatement(sqladd)) {
+			
+			preparedStatement.setString(1, Date);
+			preparedStatement.setString(2, four);
+			preparedStatement.setString(3, four30);
+			preparedStatement.setString(4, five);
+			preparedStatement.setString(5, five30);
+			preparedStatement.setString(6, six);
+			preparedStatement.setString(7, six30);
+			preparedStatement.setString(8, seven);
+			preparedStatement.setString(9, seven30);
+			
+			int row = preparedStatement.executeUpdate();
+			
+			System.out.println(row);
+			
+			preparedStatement.close();
+			
 		} catch (SQLException e) {
 	    	  response.getWriter().println("SQL Exception occured. <br><br>");
 	    	  e.printStackTrace();
