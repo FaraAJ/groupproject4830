@@ -37,6 +37,14 @@
                 alert("Phone Number Required");
                 return;
             }
+            
+         	// Check if password meets minimum length requirement
+            const minPasswordLength = 5;
+            if ($("#password").val().length < minPasswordLength) {
+                alert("Password must be at least " + minPasswordLength + " characters long");
+                return;
+            }
+            
 
             // Check if password and confirm password match
             if ($("#password").val() !== $("#cpassword").val()) {
