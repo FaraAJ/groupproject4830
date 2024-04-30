@@ -59,23 +59,24 @@
 </head>
 <body>
 <form action="" id="inputForm">
+<input type="hidden" name="userid" value=<%= request.getParameter("userid") %>>
 <div class="rsv" id="tableList" style="float:right; margin-left: 10px; width:30%; text-align: center; border: 2px solid black">
 |Tables|
 	<input type="radio" id="table1" name="tables" value="table1">
 	<div><label for="table1">TABLE 1</label></div>
 	<input type="radio" id="table2" name="tables" value="table2">
 	<div><label for="table2">TABLE 2</label></div>
-	<input type="radio" id="table3" name="tables" value="table2">
+	<input type="radio" id="table3" name="tables" value="table3">
 	<div><label for="table3">TABLE 3</label></div>
-	<input type="radio" id="table4" name="tables" value="table2">
+	<input type="radio" id="table4" name="tables" value="table4">
 	<div><label for="table4">TABLE 4</label></div>
-	<input type="radio" id="table5" name="tables" value="table2">
+	<input type="radio" id="table5" name="tables" value="table5">
 	<div><label for="table5">TABLE 5</label></div>
-	<input type="radio" id="table6" name="tables" value="table2">
+	<input type="radio" id="table6" name="tables" value="table6">
 	<div><label for="table6">TABLE 6</label></div>
-	<input type="radio" id="table7" name="tables" value="table2">
+	<input type="radio" id="table7" name="tables" value="table7">
 	<div><label for="table7">TABLE 7</label></div>
-	<input type="radio" id="table8" name="tables" value="table2">
+	<input type="radio" id="table8" name="tables" value="table8">
 	<div><label for="table8">TABLE 8</label></div>
 </div>
 <div class="days" id="dayList" style="float:left; margin-right: 10px; width:30%; text-align: center; border: 2px solid black">
@@ -110,6 +111,7 @@
 		<div><label for="0700">7:00-7:30</label></div>
 		<input type="radio" id="0730" name="times" value="730">
 		<div><label for="0730">7:30-8:00</label></div>
+		
 </div>
 
 <div style="bottom: 0; text-align: center; width: 100%; margin-top: 5px">
