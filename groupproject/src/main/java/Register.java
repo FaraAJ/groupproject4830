@@ -32,6 +32,8 @@ public class Register extends HttpServlet {
 		String uname=request.getParameter("uname");
 		String password=request.getParameter("password");
 		String phone=request.getParameter("phone");
+		
+		
 		Member member=new Member(uname, password, phone);
 		RegisterDao rdao=new RegisterDao();
 		Boolean result=rdao.insert(member);
