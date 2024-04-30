@@ -76,9 +76,11 @@ response.setContentType("text/html;charset=UTF-8");
 			String selectedDay = request.getParameter("days").trim();
 			String time = request.getParameter("times").trim();
 			String table = request.getParameter("tables").trim();
+			String userid = request.getParameter("userid").trim();
 			System.out.println(selectedDay);
 			System.out.println(time);
 			System.out.println(table);
+			System.out.println(userid);
 	    	String sqlcommand = "SELECT * FROM "+ table + " WHERE day=\'" + selectedDay + "\';";
 	    	System.out.println(sqlcommand);
 	    	PreparedStatement prepState = connection.prepareStatement(sqlcommand);
@@ -88,26 +90,32 @@ response.setContentType("text/html;charset=UTF-8");
 	    		System.out.println(rs.getString(time));
 	    		if (rs.wasNull()) {
 	    			System.out.println("Null detected");
-	    			String message = "Reservation is empty";
+	    			String message = "Reservation has been made!";
 	    			response.setContentType("text/plain");
 	    		    response.setCharacterEncoding("UTF-8");
 	    		    response.getWriter().write(message);
 	    		    response.getWriter().close();
+	    		    sqlcommand = "UPDATE " + table + " SET `" + time + "`=\'" + userid + "\' WHERE day=\'" + selectedDay + "\';";
+	    		    System.out.println(sqlcommand);
+	    		    prepState = connection.prepareStatement(sqlcommand);
+	    		    prepState.executeUpdate();
 	    		}
 	    		else {
-	    			String message = "Reservation is already filled";
+	    			String message = "Reservation is already filled!";
 	    			response.setContentType("text/plain");
 	    		    response.setCharacterEncoding("UTF-8");
 	    		    response.getWriter().write(message);
 	    		    response.getWriter().close();
 	    			
+	    		    
 	    		}
 	    		
-	    		request.getRequestDispatcher("displayTable.jsp").forward(request, response);
+	    		//request.getRequestDispatcher("displayTable.jsp").forward(request, response);
+	    		return;
 	    	}
 	    
 		} catch (SQLException e) {
-	    	  response.getWriter().println("SQL Exception occured. <br>");
+	    	  System.out.println("An error has occured");
 	    	  e.printStackTrace();
 		}
 	}
