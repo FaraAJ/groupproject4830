@@ -73,6 +73,7 @@
 		<div><label for="friday">Friday</label></div>
 </div>
 
+<div class="times" id="timeList" style="width: 30%; text-align: center; margin: 0 auto; border: 2px solid black;">
 |Time of Day|
 		<input type="radio" id="0400" name="times" value="400">
 		<div><label for="0400">4:00-4:30</label></div>
