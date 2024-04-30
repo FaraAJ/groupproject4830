@@ -36,24 +36,7 @@
 		}
 		.rsv input:checked + div {background: green;}
 	</style>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script>
-		const ServletURL = "${pageContext.request.contextPath}/rsvHandler";
-		$(document).on("click", "#submitButton", function(event) {
-			event.preventDefault();
-			if($('input[name=days]:checked').length == 0) {
-				alert("Select day!");
-			} else if($('input[name=times]:checked').length == 0) {
-				alert("Select time!");
-			} else if($('input[name=tables]:checked').length == 0) {
-				alert("Select table!");
-			} else {
-				$.post(ServletURL, $("#inputForm").serialize(), function(responseText) {
-					$("#messageContainer").text(responseText);
-				});
-			}
-		});
-	</script>
+
 </head>
 <body>
 <form action="" id="inputForm">
@@ -89,7 +72,7 @@
 		<input type="radio" id="friday" name="days" value="Friday">
 		<div><label for="friday">Friday</label></div>
 </div>
-<div class="times" id="timeList" style="width:30%; text-align: center; margin: 0 auto; border: 2px solid black">
+
 |Time of Day|
 		<input type="radio" id="0400" name="times" value="400">
 		<div><label for="0400">4:00-4:30</label></div>
