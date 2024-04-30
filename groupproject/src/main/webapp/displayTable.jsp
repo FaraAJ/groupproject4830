@@ -36,7 +36,26 @@
 		}
 		.rsv input:checked + div {background: green;}
 	</style>
-
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script>
+        const ServletURL = "${pageContext.request.contextPath}/rsvHandler";
+		$(document).on("click", "#submitButton", function(event) {
+			event.preventDefault();
+			if($('input[name=days]:checked').length == 0) {
+				alert("Select day!");
+			} else if($('input[name=times]:checked').length == 0) {
+				alert("Select time!");
+			} else if($('input[name=tables]:checked').length == 0) {
+				alert("Select table!");
+			} else {
+				$.post(ServletURL, $("#inputForm").serialize(), function(responseText) {
+					$("#messageContainer").text(responseText);
+				});
+			}
+		});
+	</script>
+		
 </head>
 <body>
 <form action="" id="inputForm">
