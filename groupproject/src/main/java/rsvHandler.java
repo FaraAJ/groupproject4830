@@ -109,7 +109,7 @@ response.setContentType("text/html;charset=UTF-8");
 		} catch (SQLException e) {
 	    	  response.getWriter().println("SQL Exception occured. <br>");
 	    	  e.printStackTrace();
-		}
+
 	}
 
 }

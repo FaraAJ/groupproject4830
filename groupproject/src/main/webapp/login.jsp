@@ -5,55 +5,38 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Restaurant Login</title>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-		<script>
-			const ServletURL = "${pageContext.request.contextPath}/mysqlcheck";
-			$(document).on("click", "#submitButton", function(event) {
-				event.preventDefault();
-				if($.trim($("#username").val()) === ""){
-					alert("Username required!");
-				} 
-				else if($.trim($("#password").val()) === ""){
-					alert("Password required!");
-				}
-				else{
-				$.post(ServletURL,
-							$("#inputcontact").serialize(),
-							function(responseText) {
-        			document.getElementById("inputcontact").reset();
-						$("#leftdiv").html(responseText);
-    			})};
-			});
-		</script>
-		<script>
-			const ServletURL2 = "${pageContext.request.contextPath}/mysqlcheck";
-			$(document).ready(function() { 
-    			$.get(ServletURL2, function(responseText) {
-        			$("#leftdiv").html(responseText);           
-    			});
-			});
-		</script>
 	<style>
 	.container {
 		text-align: center;
 	}
 	</style>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		let url = new URL(window.location.href);
+		let params = new URLSearchParams(url.search);
+		if(params.get('invalid') == 'true'){
+			alert("Bad login! Please try again.");
+			}
+		if(params.get('accountmade') == 'true'){
+			alert("Account successfully made, you may now log in.");
+		}
+	});
+	</script>
 </head>
 <body>
 	<div id="centerdiv" name="centerdiv" class="container">
-		<form id="login" name="login" >
+		<form id="login" name="login" action="login" method="post">
 			<label for="username">User name:</label><br>
-			<input type="text" id="username" name="username"><br>
+			<input type="text" id="username" name="username" autocomplete="off"><br>
 			<label for="password">Password:</label><br>
-			<input type="text" id="password" name="password"><br>
+			<input type="password" id="password" name="password" autocomplete="off"><br><br>
+			<input type="submit" value="Submit" id="submitButton">
 		</form>
-	<div id="submitdiv" name="submitdiv" style="margin-top: 10px; margin-bottom: 10px">
-		<form id="submitform" name="submitform">
-			<input type="submit" value="Submit" id="loginSubmit">
-		</form>
-	</div>
+
 	<div>
-	<a href="createuser.jsp">New user? Create account here.</a>
+	
+	<a href="memberRegister.jsp">New user? Create account here.</a>
 	</div>
 </div>
 </body>
