@@ -46,18 +46,18 @@
 	<div><label for="table1">TABLE 1</label></div>
 	<input type="radio" id="table2" name="tables" value="table2">
 	<div><label for="table2">TABLE 2</label></div>
-	<input type="radio" id="table2" name="tables" value="table2">
-	<div><label for="table2">TABLE 3</label></div>
-	<input type="radio" id="table2" name="tables" value="table2">
-	<div><label for="table2">TABLE 4</label></div>
-	<input type="radio" id="table2" name="tables" value="table2">
-	<div><label for="table2">TABLE 5</label></div>
-	<input type="radio" id="table2" name="tables" value="table2">
-	<div><label for="table2">TABLE 6</label></div>
-	<input type="radio" id="table2" name="tables" value="table2">
-	<div><label for="table2">TABLE 7</label></div>
-	<input type="radio" id="table2" name="tables" value="table2">
-	<div><label for="table2">TABLE 8</label></div>
+	<input type="radio" id="table3" name="tables" value="table2">
+	<div><label for="table3">TABLE 3</label></div>
+	<input type="radio" id="table4" name="tables" value="table2">
+	<div><label for="table4">TABLE 4</label></div>
+	<input type="radio" id="table5" name="tables" value="table2">
+	<div><label for="table5">TABLE 5</label></div>
+	<input type="radio" id="table6" name="tables" value="table2">
+	<div><label for="table6">TABLE 6</label></div>
+	<input type="radio" id="table7" name="tables" value="table2">
+	<div><label for="table7">TABLE 7</label></div>
+	<input type="radio" id="table8" name="tables" value="table2">
+	<div><label for="table8">TABLE 8</label></div>
 </div>
 <div class="days" id="dayList" style="float:left; margin-right: 10px; width:30%; text-align: center; border: 2px solid black">
 |Day of the Week|
@@ -73,6 +73,7 @@
 		<div><label for="friday">Friday</label></div>
 </div>
 
+<div class="times" id="timeList" style="width: 30%; text-align: center; margin: 0 auto; border: 2px solid black;">
 |Time of Day|
 		<input type="radio" id="0400" name="times" value="400">
 		<div><label for="0400">4:00-4:30</label></div>
