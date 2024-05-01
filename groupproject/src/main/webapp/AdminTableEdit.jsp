@@ -5,16 +5,34 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Admin EDIT</title>
+<link rel="shortcut icon" href="favicon.ico"/>
 </head>
 <body>
 
-<h1>Admin Edit Page</h1>
+<h1>Admin Table Edit Page</h1>
 
 <table style="width:150%">
 
 <form action="${pageContext.request.contextPath}/AdminTable" method="post">
-	<label for ="Date">Date<br></label>
-	<input type="text" id="Date" name="Date" /><br>
+	<label for ="table">Table Number<br></label>
+	<select name="TableNum" id="TableNum">
+  		<option value="Table1">Table1</option>
+  		<option value="Table2">Table2</option>
+  		<option value="Table3">Table3</option>
+  		<option value="Table4">Table4</option>
+  		<option value="Table5">Table5</option>
+  		<option value="Table6">Table6</option>
+  		<option value="Table7">Table7</option>
+  		<option value="Table8">Table8</option>
+	</select><br>
+	<label for ="date">Date<br></label>
+	<select name="Date" id="Date">
+  		<option value="Monday">Monday</option>
+  		<option value="Tuesday">Tuesday</option>
+  		<option value="Wednesday">Wednesday</option>
+  		<option value="Thursday">Thursday</option>
+  		<option value="Friday">Friday</option>
+	</select><br><br>
 	<label for ="400">4:00<br></label>
 	<input type="text" id="four" name="four" /><br>
 	<label for ="430">4:30<br></label>
@@ -36,6 +54,8 @@
 </form>
 
 </table>
+
+<br><a href="AdminTable"><button>BACK</button></a>
 
 </body>
 </html>

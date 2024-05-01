@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Table
  */
-@WebServlet("/AdminTable")
-public class AdminTable extends HttpServlet {
+@WebServlet("/AdminUser")
+public class AdminUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static String url = "jdbc:mysql://ec2-174-129-188-22.compute-1.amazonaws.com:3306/groupDB?useSSL=false&allowPublicKeyRetrieval=true";
 	static String user = "bnokerremote";
@@ -26,7 +26,7 @@ public class AdminTable extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminTable() {
+    public AdminUser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -67,42 +67,31 @@ public class AdminTable extends HttpServlet {
 	       }
 		
 	      try {
-	    	  response.getWriter().append("<title>Admin Table</title>");
+	    	  response.getWriter().append("<title>Admin Users</title>");
 	    	  response.getWriter().append("<link rel=\"shortcut icon\" href=\"favicon.ico\"/>");
 	    	  response.getWriter().append("<a href=\"Admin.jsp\"><button>HOME</button></a><br>");
-	    	  String[] sqlCommands = new String[] {
-	    			    "Select * from table1",
-	    			    "Select * from table2",
-	    			    "Select * from table3",
-	    			    "Select * from table4",
-	    			    "Select * from table5",
-	    			    "Select * from table6",
-	    			    "Select * from table7",
-	    			    "Select * from table8"
-	    			};
-
-	    	  for (int xx = 0; xx < sqlCommands.length; xx++) {
-	    		  	String command = sqlCommands[xx];
-	    			
-	    		  PreparedStatement prepState = connection.prepareStatement(command);
+	    	  
+	    	  String commander = "Select * from users";
+	    			    
+	    		  PreparedStatement prepState = connection.prepareStatement(commander);
 	    		  ResultSet rs = prepState.executeQuery();
 	    		  
 	    		  response.getWriter().append("<div style=\"white-space:pre\">");
 	    		  
-	    		  response.getWriter().append(String.format("<h3>Table %s</h3>", xx + 1));
+	    		  response.getWriter().append("<h3>User List</h3>");
 	    		  
 	    		  
 	    		  String dashes = "+-----------";
-	    		  for (int x = 0; x < 8; x++) {
+	    		  for (int x = 0; x < 3; x++) {
 	    			  dashes = dashes + "+-----------";
 	    		  }
 	    		  
 	    		  response.getWriter().append(dashes + "+" + "<br>");
-	    		  response.getWriter().append("|     day      |     400     |     430     |     500     |     530     |     600      |     630     |     700     |     730     |" + "<br>");
+	    		  response.getWriter().append("|     id      |     name     |     password     |     phone     |" + "<br>");
 	    		  response.getWriter().append(dashes + "+" + "<br>");
 	    		  while(rs.next()) {
 	    			  
-	    			  response.getWriter().append("| " + rs.getString("day") + " |    " + rs.getString("400") + "     |     " + rs.getString("430") + "     |     " + rs.getString("500") + "     |     " + rs.getString("530") + "     |     " + rs.getString("600") + "     |     " + rs.getString("630") + "     |     " + rs.getString("700") + "     |     " + rs.getString("730") + "     |     " + "<br>");
+	    			  response.getWriter().append("| " + rs.getString("id") + " |    " + rs.getString("name") + "     |     " + rs.getString("password") + "     |     " + rs.getString("phone") + "     |     " + "<br>");
 	    			  
 	    			  response.getWriter().append(dashes + "+" + "<br>");
 	    			  
@@ -111,7 +100,6 @@ public class AdminTable extends HttpServlet {
 	    		  response.getWriter().append("<a href=\"AdminUserEdit.jsp\"><button>EDIT</button></a><br><br>");
 	    		  response.getWriter().append("</div>");
 	    	
-	    	  }
 		    
 	      } catch (SQLException e) {
 	    	  response.getWriter().println("SQL Exception occured. <br>");
@@ -126,76 +114,36 @@ public class AdminTable extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String TableNum = request.getParameter("TableNum").trim();
-		String Date_ = request.getParameter("Date").trim();
-		String four_ = request.getParameter("four").trim();
-		String four30_ = request.getParameter("four30").trim();
-		String five_ = request.getParameter("five").trim();
-		String five30_ = request.getParameter("five30").trim();
-		String six_ = request.getParameter("six").trim();
-		String six30_ = request.getParameter("six30").trim();
-		String seven_ = request.getParameter("seven").trim();
-		String seven30_ = request.getParameter("seven30").trim();
+		String userName = request.getParameter("Name").trim();
+		String pass = request.getParameter("Password").trim();
+		String phon = request.getParameter("Phone").trim();
 		
-		try {
-			String commandd = "Select * from " + TableNum.toLowerCase() + " WHERE day = ?";
-			try (PreparedStatement prepState = connection.prepareStatement(commandd)) {
-	            prepState.setString(1, Date_); 
-	            
-	            ResultSet rs = prepState.executeQuery();
+		String sqldelete = "DELETE FROM users WHERE name = ?";
+		try (Connection conn = DriverManager.getConnection(
+				"jdbc:mysql://ec2-174-129-188-22.compute-1.amazonaws.com:3306/groupDB?useSSL=false&allowPublicKeyRetrieval=true", "bnokerremote", "password");
+             PreparedStatement preparedStatement = conn.prepareStatement(sqldelete)) {
+				
+			preparedStatement.setString(1, userName);
 			
-			while(rs.next()) {
-				if (four_ == "") {
-					four_ = rs.getString("400");
-				}
-				if (four30_ == "") {
-					four30_ = rs.getString("430");
-				}
-				if (five_ == "") {
-					five_ = rs.getString("500");
-				}
-				if (five30_ == "") {
-					five30_ = rs.getString("530");
-				}
-				if (six_ == "") {
-					six_ = rs.getString("600");
-				}
-				if (six30_ == "") {
-					six30_ = rs.getString("630");
-				}
-				if (seven_ == "") {
-					seven_ = rs.getString("700");
-				}
-				if (seven30_ == "") {
-					seven30_ = rs.getString("730");
-				} 
-			}
-		
-			prepState.close();
-			
-			}
+	        int col = preparedStatement.executeUpdate();
+	        
+	        System.out.println(col);	
+	        
+			preparedStatement.close();
 			
 		} catch (SQLException e) {
 	    	  response.getWriter().println("SQL Exception occured. <br>");
 	    	  e.printStackTrace();
 	      }
 		
-		String sqlupdate = "UPDATE " + TableNum.toLowerCase() + " SET `400` = ?, `430` = ?, `500` = ?, `530` = ?, `600` = ?, `630` = ?, `700` = ?, `730` = ? WHERE day = ?";
-		System.out.println(sqlupdate);
-		
+		String sqladd = "INSERT INTO users (name, password, phone) VALUES (?, ?, ?)";
 		try (Connection conn = DriverManager.getConnection(
 				"jdbc:mysql://ec2-174-129-188-22.compute-1.amazonaws.com:3306/groupDB?useSSL=false&allowPublicKeyRetrieval=true", "bnokerremote", "password");
-             PreparedStatement preparedStatement = conn.prepareStatement(sqlupdate)) {
+             PreparedStatement preparedStatement = conn.prepareStatement(sqladd)) {
 
-			preparedStatement.setString(1, four_);
-			preparedStatement.setString(2, four30_);
-			preparedStatement.setString(3, five_);
-			preparedStatement.setString(4, five30_);
-			preparedStatement.setString(5, six_);
-			preparedStatement.setString(6, six30_);
-			preparedStatement.setString(7, seven_);
-			preparedStatement.setString(8, seven30_);
-			preparedStatement.setString(9, Date_);
+			preparedStatement.setString(1, userName);
+			preparedStatement.setString(2, pass);
+			preparedStatement.setString(3, phon);
 			
 			int row = preparedStatement.executeUpdate();
 
