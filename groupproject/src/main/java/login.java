@@ -78,14 +78,14 @@ public class login extends HttpServlet {
 	    	  rs.next();
 	    	  String pword = rs.getString("password");
 	    	  String admin = rs.getString("is_admin");
-	    	  
+	    	  String id = rs.getString("id");	    	  
 	    	  if (pword.equals(request.getParameterValues("password")[0])) {
 	    		  if(Integer.parseInt(admin) == 1) {
 	    			  //TODO THIS NEEDS TO GO TO ADMIN PAGE
 	    			  response.sendRedirect("Admin.jsp");
 	    		  }
 	    		  else {
-	    		  response.sendRedirect("displayTable.jsp");
+	    		  response.sendRedirect("displayTable.jsp?userid="+ id);
 	    		  }
 	    	  }
 	    	  else {

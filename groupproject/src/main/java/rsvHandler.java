@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,7 @@ public class rsvHandler extends HttpServlet {
 	static String user = "bnokerremote";
 	static String password = "password";
 	Connection connection = null;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,7 +39,14 @@ public class rsvHandler extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.setContentType("text/html;charset=UTF-8");
+
+	}
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+response.setContentType("text/html;charset=UTF-8");
 		
 		try {
 	         Class.forName("com.mysql.cj.jdbc.Driver");// ("com.mysql.jdbc.Driver");
@@ -49,13 +58,13 @@ public class rsvHandler extends HttpServlet {
 		try {
 	          connection = DriverManager.getConnection(url, user, password);
 	          connection.setCatalog("groupDB"); 
-	       } catch (SQLException e) {
+	      } catch (SQLException e) {
 	          System.out.println("Connection Failed! Check output console");
 	          e.printStackTrace();
 	          return;
 	       }
 		if (connection != null) {
-	          response.getWriter().println("Connected to database successfully.<br>");
+			System.out.println("Connected to database successfully.");
 	       }
 	       else {
 	          System.out.println("Failed to make connection!");
@@ -63,28 +72,52 @@ public class rsvHandler extends HttpServlet {
 		
 		// TODO need to get mySQL tables displaying onto displayTable
 		try {
-	    	  String sqlcommand = "Select * from users";
-	    	  PreparedStatement prepState = connection.prepareStatement(sqlcommand);
-	    	  ResultSet rs = prepState.executeQuery();
-	    	  
-		} catch (SQLException e) {
-	    	  response.getWriter().println("SQL Exception occured. <br>");
-	    	  e.printStackTrace();
-	    	  
-	    }
-	}
+			response.setContentType("text/html");
+			String selectedDay = request.getParameter("days").trim();
+			String time = request.getParameter("times").trim();
+			String table = request.getParameter("tables").trim();
+			String userid = request.getParameter("userid").trim();
+			System.out.println(selectedDay);
+			System.out.println(time);
+			System.out.println(table);
+			System.out.println(userid);
+	    	String sqlcommand = "SELECT * FROM "+ table + " WHERE day=\'" + selectedDay + "\';";
+	    	System.out.println(sqlcommand);
+	    	PreparedStatement prepState = connection.prepareStatement(sqlcommand);
+	    	ResultSet rs = prepState.executeQuery();
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.setContentType("text/html");
-		String day = request.getParameter("days").trim();
-		String time = request.getParameter("times").trim();
-		System.out.println(day + " and " + time);
-		//doGet(request, response);
-		response.getWriter().append("Day: "+ day + "<br>Time: "+ time+ "<br>");
+	    	if (rs.next()) {
+	    		System.out.println(rs.getString(time));
+	    		if (rs.wasNull()) {
+	    			System.out.println("Null detected");
+	    			String message = "Reservation has been made!";
+	    			response.setContentType("text/plain");
+	    		    response.setCharacterEncoding("UTF-8");
+	    		    response.getWriter().write(message);
+	    		    response.getWriter().close();
+	    		    sqlcommand = "UPDATE " + table + " SET `" + time + "`=\'" + userid + "\' WHERE day=\'" + selectedDay + "\';";
+	    		    System.out.println(sqlcommand);
+	    		    prepState = connection.prepareStatement(sqlcommand);
+	    		    prepState.executeUpdate();
+	    		}
+	    		else {
+	    			String message = "Reservation is already filled!";
+	    			response.setContentType("text/plain");
+	    		    response.setCharacterEncoding("UTF-8");
+	    		    response.getWriter().write(message);
+	    		    response.getWriter().close();
+	    			
+	    		    
+	    		}
+	    		
+	    		//request.getRequestDispatcher("displayTable.jsp").forward(request, response);
+	    		return;
+	    	}
+	    
+		} catch (SQLException e) {
+	    	  System.out.println("An error has occured");
+	    	  e.printStackTrace();
+		}
 	}
 
 }
