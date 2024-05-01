@@ -36,7 +36,7 @@
 
 	<div>
 	
-	<a href="memberRegister.jsp">New user? Create account here.</a>
+	<a href="memberRegister.jsp" id="newUser">New user? Create account here.</a>
 	</div>
 </div>
 </body>
