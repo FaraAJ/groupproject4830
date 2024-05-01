@@ -74,13 +74,27 @@ class TestCases {
 	}
 	@Test
 	void testTable() throws InterruptedException{
-		WebElement user = driver.findElement(By.name("username"));
-		WebElement pword = driver.findElement(By.name("password"));
+		WebElement user = driver.findElement(By.id("username"));
+		WebElement pword = driver.findElement(By.id("password"));
 		WebElement submit = driver.findElement(By.id("submitButton"));
 		user.sendKeys("user1");
 		pword.sendKeys("password");
 		submit.click();
+		Thread.sleep(1000);
+		WebElement table = driver.findElement(By.cssSelector("label[for='table1']"));
+		WebElement day = driver.findElement(By.cssSelector("label[for='monday']"));
+		WebElement hour = driver.findElement(By.cssSelector("label[for='0500']"));
+		WebElement btn = driver.findElement(By.id("submitButton"));
 		
+		table.click();
+		day.click();
+		hour.click();
+		btn.click();
+		Thread.sleep(2000);
+		
+		String txt = driver.findElement(By.id("messageContainer")).getText();
+		Assert.assertEquals(txt, "Reservation is already filled!");
+		driver.quit();
 		
 	}
 
