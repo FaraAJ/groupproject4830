@@ -92,23 +92,25 @@ public class AdminTable extends HttpServlet {
 	    		  response.getWriter().append(String.format("<h3>Table %s</h3>", xx + 1));
 	    		  
 	    		  
-	    		  String dashes = "+-----------";
+	    		  String dashes = "+--------------------";
 	    		  for (int x = 0; x < 8; x++) {
-	    			  dashes = dashes + "+-----------";
+	    			  dashes = dashes + "+--------------------";
 	    		  }
 	    		  
+	    		  double colLen = 13;
+	    		  
 	    		  response.getWriter().append(dashes + "+" + "<br>");
-	    		  response.getWriter().append("|     day      |     400     |     430     |     500     |     530     |     600      |     630     |     700     |     730     |" + "<br>");
+	    		  response.getWriter().append("|" + spaceMaker((colLen) - 4) + "<b>day </b>" + spaceMaker((colLen) - 4) + "|" + spaceMaker((colLen - 5)) + "<b>4:00</b>" + spaceMaker((colLen - 5)) + "|" + spaceMaker((colLen - 5)) + "<b>4:30 </b>" + spaceMaker((colLen - 5)) + "|" + spaceMaker((colLen - 5)) + "<b>5:00 </b>" + spaceMaker((colLen - 5)) + "|" + spaceMaker((colLen - 5)) + "<b>5:30 </b>" + spaceMaker((colLen - 5)) + "|" + spaceMaker((colLen - 5)) + "<b>6:00 </b>" + spaceMaker((colLen - 5)) + "|" + spaceMaker((colLen - 5)) + "<b>6:30 </b>" + spaceMaker((colLen - 5)) + "|" + spaceMaker((colLen - 5)) + "<b>7:00 </b>" + spaceMaker((colLen - 5)) + "|" + spaceMaker((colLen - 5)) + "<b>7:30</b>" + spaceMaker((colLen - 5)) + "|" + "<br>");
 	    		  response.getWriter().append(dashes + "+" + "<br>");
 	    		  while(rs.next()) {
 	    			  
-	    			  response.getWriter().append("| " + rs.getString("day") + " |    " + rs.getString("400") + "     |     " + rs.getString("430") + "     |     " + rs.getString("500") + "     |     " + rs.getString("530") + "     |     " + rs.getString("600") + "     |     " + rs.getString("630") + "     |     " + rs.getString("700") + "     |     " + rs.getString("730") + "     |     " + "<br>");
+	    			  response.getWriter().append("|" + spaceMaker((colLen - ((rs.getString("day")).length() + 1))) + rs.getString("day") + spaceMaker((colLen - ((rs.getString("day")).length() + 1))) + "|" + spaceMaker((colLen - ((rs.getString("400")).length() + 1))) + rs.getString("400") + spaceMaker((colLen - ((rs.getString("400")).length() + 1))) + "|" + spaceMaker((colLen - ((rs.getString("430")).length() + 1))) + rs.getString("430") + spaceMaker((colLen - ((rs.getString("430")).length() + 1))) + "|" + spaceMaker((colLen - ((rs.getString("500")).length() + 1))) + rs.getString("500") + spaceMaker((colLen - ((rs.getString("500")).length() + 1))) + "|" + spaceMaker((colLen - ((rs.getString("530")).length() + 1))) + rs.getString("530") + spaceMaker((colLen - ((rs.getString("530")).length() + 1))) + "|" + spaceMaker((colLen - ((rs.getString("600")).length() + 1))) + rs.getString("600") + spaceMaker((colLen - ((rs.getString("600")).length() + 1))) + "|" + spaceMaker((colLen - ((rs.getString("630")).length() + 1))) + rs.getString("630") + spaceMaker((colLen - ((rs.getString("630")).length() + 1))) + "|" + spaceMaker((colLen - ((rs.getString("700")).length() + 1))) + rs.getString("700") + spaceMaker((colLen - ((rs.getString("700")).length() + 1))) + "|" + spaceMaker((colLen - ((rs.getString("730")).length() + 1))) + rs.getString("730") + spaceMaker((colLen - ((rs.getString("730")).length() + 1))) + "|" + "<br>");
 	    			  
 	    			  response.getWriter().append(dashes + "+" + "<br>");
 	    			  
 	    		  }
 		    
-	    		  response.getWriter().append("<a href=\"AdminUserEdit.jsp\"><button>EDIT</button></a><br><br>");
+	    		  response.getWriter().append("<a href=\"AdminTableEdit.jsp\"><button>EDIT</button></a><br><br>");
 	    		  response.getWriter().append("</div>");
 	    	
 	    	  }
@@ -121,6 +123,23 @@ public class AdminTable extends HttpServlet {
 		  response.getWriter().append("<br><a href=\"Admin.jsp\"><button>HOME</button></a>");  
 		  
 	}
+	
+	public String spaceMaker(double num) {
+		System.out.println("This is num: " + num);
+		  String result = "";
+		  if(num % 1 != 1) {
+			  for(int x = 0; x <= num + 1; x++) {
+				  result = result + " ";
+			  }
+		  }
+		  else {
+			  for(int x = 0; x < num; x++) {
+				  result = result + " ";
+			  }
+		  }
+		  return result;
+	  }
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

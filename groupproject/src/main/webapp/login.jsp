@@ -5,6 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Restaurant Login</title>
+<link rel="shortcut icon" href="favicon.ico"/>
 	<style>
 	.container {
 		text-align: center;
