@@ -35,6 +35,12 @@
 			border: 2px solid black;
 		}
 		.rsv input:checked + div {background: green;}
+		
+		body {
+			height: 100%; margin: 0;
+		}
+		
+		.bg {background-image: url("rsv_b_image.jpg"); height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;}
 	</style>
 	
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -64,9 +70,10 @@
 		
 </head>
 <body>
+<div class = "bg">
 <form action="" id="inputForm">
 <input type="hidden" name="userid" value=<%= request.getParameter("userid") %>>
-<div class="rsv" id="tableList" style="float:right; margin-left: 10px; width:30%; text-align: center; border: 2px solid black">
+<div class="rsv" id="tableList" style="float:right; margin-left: 10px; width:30%; text-align: center; border: 2px solid black; background-color: white;">
 |Tables|
 	<input type="radio" id="table1" name="tables" value="table1">
 	<div><label for="table1">TABLE 1</label></div>
@@ -85,7 +92,7 @@
 	<input type="radio" id="table8" name="tables" value="table8">
 	<div><label for="table8">TABLE 8</label></div>
 </div>
-<div class="days" id="dayList" style="float:left; margin-right: 10px; width:30%; text-align: center; border: 2px solid black">
+<div class="days" id="dayList" style="float:left; margin-right: 10px; width:30%; text-align: center; border: 2px solid black; background-color: white;">
 |Day of the Week|
 		<input type="radio" id="monday" name="days" value="Monday">
 		<div><label for="monday">Monday</label></div>
@@ -99,7 +106,7 @@
 		<div><label for="friday">Friday</label></div>
 </div>
 
-<div class="times" id="timeList" style="width: 30%; text-align: center; margin: 0 auto; border: 2px solid black;">
+<div class="times" id="timeList" style="width: 30%; text-align: center; margin: 0 auto; border: 2px solid black; background-color: white;">
 |Time of Day|
 		<input type="radio" id="0400" name="times" value="400">
 		<div><label for="0400">4:00-4:30</label></div>
@@ -121,7 +128,7 @@
 </div>
 
 <div style="bottom: 0; text-align: center; width: 100%; margin-top: 5px">
-		<div id="messageContainer"></div><br>
+		<div id="messageContainer" style="background-color: white; display: inline-block; margin-bottom: 5px; border: 2px solid black;"></div><br>
 		<input type="submit" value="Reserve Table" id="submitButton"><br>
 
 </div>
@@ -142,5 +149,6 @@
 				<button>My Reservations</button>
 			</a>
 		</div>
+</div>
 </body>	
 </html>
