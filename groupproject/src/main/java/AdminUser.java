@@ -78,20 +78,22 @@ public class AdminUser extends HttpServlet {
 	    		  
 	    		  response.getWriter().append("<div style=\"white-space:pre\">");
 	    		  
-	    		  response.getWriter().append("<h3>User List</h3>");
+	    		  response.getWriter().append("<h2>User List</h2>");
 	    		  
 	    		  
-	    		  String dashes = "+-----------";
+	    		  String dashes = "+--------------------------------";
 	    		  for (int x = 0; x < 3; x++) {
-	    			  dashes = dashes + "+-----------";
+	    			  dashes = dashes + "+--------------------------------";
 	    		  }
 	    		  
+	    		  double colLen = 22;
+	    		  
 	    		  response.getWriter().append(dashes + "+" + "<br>");
-	    		  response.getWriter().append("|     id      |     name     |     password     |     phone     |" + "<br>");
+	    		  response.getWriter().append("|" + spaceMaker((colLen - 1)) + "<b>id</b>" + spaceMaker((colLen - 1)) + "|" +spaceMaker((colLen - 5)) + "<b>name</b>" + spaceMaker((colLen - 5)) + "|" + spaceMaker((colLen - 8)) + "<b>password</b>" + spaceMaker((colLen - 8)) + "|" + spaceMaker((colLen - 5)) + "<b>phone</b>" + spaceMaker((colLen - 5)) + "|" + "<br>");
 	    		  response.getWriter().append(dashes + "+" + "<br>");
 	    		  while(rs.next()) {
 	    			  
-	    			  response.getWriter().append("| " + rs.getString("id") + " |    " + rs.getString("name") + "     |     " + rs.getString("password") + "     |     " + rs.getString("phone") + "     |     " + "<br>");
+	    			  response.getWriter().append("|"+ spaceMaker((colLen - ((rs.getString("id")).length()))) + rs.getString("id") + spaceMaker((colLen - ((rs.getString("id")).length()))) + "|"+ spaceMaker((colLen - ((rs.getString("name")).length())) + 1) + rs.getString("name") + spaceMaker((colLen - ((rs.getString("name")).length())) + 1) + "|" + spaceMaker((colLen - ((rs.getString("password")).length()))) + rs.getString("password") + spaceMaker((colLen - ((rs.getString("password")).length()))) + "|" + spaceMaker((colLen - ((rs.getString("phone")).length()))) + rs.getString("phone") + spaceMaker((colLen - ((rs.getString("phone")).length()))) + "|" + "<br>");
 	    			  
 	    			  response.getWriter().append(dashes + "+" + "<br>");
 	    			  
@@ -109,6 +111,23 @@ public class AdminUser extends HttpServlet {
 		  response.getWriter().append("<br><a href=\"Admin.jsp\"><button>HOME</button></a>");  
 		  
 	}
+	
+	public String spaceMaker(double num) {
+		System.out.println("This is num: " + num);
+		  String result = "";
+		  if(num % 1 != 0) {
+			  for(int x = 0; x <= num + 1; x++) {
+				  result = result + " ";
+			  }
+			  result = result + "   ";
+		  }
+		  else {
+			  for(int x = 0; x < num; x++) {
+				  result = result + " ";
+			  }
+		  }
+		  return result;
+	  }
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

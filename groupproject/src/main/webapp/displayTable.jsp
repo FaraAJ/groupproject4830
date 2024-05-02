@@ -123,7 +123,7 @@
 <div style="bottom: 0; text-align: center; width: 100%; margin-top: 5px">
 		<div id="messageContainer"></div><br>
 		<input type="submit" value="Reserve Table" id="submitButton"><br>
-		
+
 </div>
 </form>
 
