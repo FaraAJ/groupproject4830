@@ -15,7 +15,7 @@ class TestCases {
 	public void setUp() throws Exception{
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		driver.get("localhost:8080/groupproject");
+		driver.get("unoblob.ddns.net:8080/groupproject");
 
 		
 	}
@@ -45,7 +45,7 @@ class TestCases {
 		submit.click();
 		String url = driver.getCurrentUrl();
 		System.out.print(url);
-		Assert.assertEquals(url, "http://localhost:8080/groupproject/displayTable.jsp?userid=8");
+		Assert.assertEquals(url, "http://unoblob.ddns.net:8080/groupproject/displayTable.jsp?userid=8");
 		driver.quit();
 	}
 	@Test
