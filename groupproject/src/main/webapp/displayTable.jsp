@@ -10,7 +10,7 @@
 		.days label {display: block;}
 		.days input + div {background: white;}
 		.days input + div label {
-			padding: 53px;
+			padding: 53.3px;
 			cursor: pointer;
 			border: 2px solid black;
 		}
@@ -31,7 +31,7 @@
 		.rsv input + div {background: white;}
 		.rsv input + div label {
 			cursor: pointer;
-			padding: 25px;
+			padding: 28.9px;
 			border: 2px solid black;
 		}
 		.rsv input:checked + div {background: green;}
@@ -40,6 +40,7 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script>
         const ServletURL = "${pageContext.request.contextPath}/rsvHandler";
+        const rsvServletURL = "${pageContext.request.contextPath}/MyReservationsServlet";
 		$(document).on("click", "#submitButton", function(event) {
 			event.preventDefault();
 			if($('input[name=days]:checked').length == 0) {
@@ -52,6 +53,11 @@
 				$.post(ServletURL, $("#inputForm").serialize(), function(responseText) {
 					$("#messageContainer").text(responseText);
 				});
+				
+				$.post(rsvServletURL, $("#inputForm").serialize(), function(responseText) {
+					$("#rsvmessageContainer").text(responseText);
+				});
+				
 			}
 		});
 	</script>
@@ -116,8 +122,16 @@
 
 <div style="bottom: 0; text-align: center; width: 100%; margin-top: 5px">
 		<div id="messageContainer"></div><br>
-		<input type="submit" value="Reserve Table" id="submitButton">
+		<input type="submit" value="Reserve Table" id="submitButton"><br>
+		
 </div>
 </form>
+
+<div style="text-align: center; width: 100%; margin-top: 5px">
+		
+			<a href="myReservations.jsp">
+				<button>My Reservations</button>
+			</a>
+		</div>
 </body>	
 </html>
