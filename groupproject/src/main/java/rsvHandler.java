@@ -64,7 +64,7 @@ response.setContentType("text/html;charset=UTF-8");
 	          return;
 	       }
 		if (connection != null) {
-			System.out.println("Connected to database successfully.");
+			//System.out.println("Connected to database successfully.");
 	       }
 	       else {
 	          System.out.println("Failed to make connection!");
@@ -77,26 +77,27 @@ response.setContentType("text/html;charset=UTF-8");
 			String time = request.getParameter("times").trim();
 			String table = request.getParameter("tables").trim();
 			String userid = request.getParameter("userid").trim();
-			System.out.println(selectedDay);
+			/*System.out.println(selectedDay);
 			System.out.println(time);
 			System.out.println(table);
-			System.out.println(userid);
+			System.out.println(userid);*/
 	    	String sqlcommand = "SELECT * FROM "+ table + " WHERE day=\'" + selectedDay + "\';";
-	    	System.out.println(sqlcommand);
+	    	//System.out.println(sqlcommand);
 	    	PreparedStatement prepState = connection.prepareStatement(sqlcommand);
 	    	ResultSet rs = prepState.executeQuery();
 
 	    	if (rs.next()) {
-	    		System.out.println(rs.getString(time));
-	    		if (rs.wasNull()) {
-	    			System.out.println("Null detected");
+	    		//System.out.println(rs.getString(time));
+	    		//System.out.println(rs.getString(time));
+	    		if (rs.wasNull() || rs.getString(time).matches("0")) {
+	    			//System.out.println("Null detected");
 	    			String message = "Reservation has been made!";
 	    			response.setContentType("text/plain");
 	    		    response.setCharacterEncoding("UTF-8");
 	    		    response.getWriter().write(message);
 	    		    response.getWriter().close();
 	    		    sqlcommand = "UPDATE " + table + " SET `" + time + "`=\'" + userid + "\' WHERE day=\'" + selectedDay + "\';";
-	    		    System.out.println(sqlcommand);
+	    		    //System.out.println(sqlcommand);
 	    		    prepState = connection.prepareStatement(sqlcommand);
 	    		    prepState.executeUpdate();
 	    		}
