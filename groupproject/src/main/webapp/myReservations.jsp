@@ -18,6 +18,16 @@
             background-color: #f2f2f2;
         }
     </style>
+            <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+    const servletURL = "${pageContext.request.contextPath}/MyReservationsServlet";
+    $(document).ready(function(){
+    	$.post(servletURL,function(responseText){
+    		$("#tablebody").html(responseText);
+    	})
+    });
+		
+    </script>
 </head>
 <body>
 
@@ -31,12 +41,7 @@
             <th>Time</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td>${table}</td>
-            <td>${day}</td>
-            <td>${time}</td>
-        </tr>
+    <tbody id="tablebody">
     </tbody>
 </table>
 

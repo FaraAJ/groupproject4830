@@ -127,9 +127,18 @@
 </div>
 </form>
 
-<div style="text-align: center; width: 100%; margin-top: 5px">
-		
-			<a href="myReservations.jsp">
+		<div style="text-align: center; width: 100%; margin-top: 5px">
+			<script>
+			function func(){
+				const str = window.location.search;
+				const param = new URLSearchParams(str);
+				const id = param.get("userid");
+				window.location.href = "myReservations.jsp?userid="+id;
+				
+			}
+			</script>
+					
+			<a onclick= "func();">
 				<button>My Reservations</button>
 			</a>
 		</div>
