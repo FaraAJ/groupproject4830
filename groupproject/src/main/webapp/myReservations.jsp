@@ -51,8 +51,12 @@
     </style>
             <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
-    const servletURL = "${pageContext.request.contextPath}/MyReservationsServlet";
+   
     $(document).ready(function(){
+   	    const str = window.location.search;
+   		const param = new URLSearchParams(str);
+   		const id = param.get("userid");
+   		const servletURL = "${pageContext.request.contextPath}/MyReservationsServlet?userid="+id;
     	$.post(servletURL,function(responseText){
     		$("#tablebody").html(responseText);
     	})

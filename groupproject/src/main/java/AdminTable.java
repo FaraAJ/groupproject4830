@@ -110,7 +110,7 @@ public class AdminTable extends HttpServlet {
 	    			  
 	    		  }
 		    
-	    		  response.getWriter().append("<a href=\"AdminTableEdit.jsp\"><button>EDIT</button></a><br><br>");
+	    		  response.getWriter().append("<a id=\"TableEdit\" href=\"AdminTableEdit.jsp\"><button>EDIT</button></a><br><br>");
 	    		  response.getWriter().append("</div>");
 	    	
 	    	  }
@@ -125,7 +125,7 @@ public class AdminTable extends HttpServlet {
 	}
 	
 	public String spaceMaker(double num) {
-		System.out.println("This is num: " + num);
+		//System.out.println("This is num: " + num);
 		  String result = "";
 		  if(num % 1 != 1) {
 			  for(int x = 0; x <= num + 1; x++) {

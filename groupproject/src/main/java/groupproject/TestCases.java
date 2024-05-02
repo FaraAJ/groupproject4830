@@ -36,6 +36,8 @@ class TestCases {
 		alert.dismiss();
 		Thread.sleep(1000);
 		
+		
+		
 		//driver.switchTo().defaultContent();
 		user = driver.findElement(By.name("username"));
 		pword = driver.findElement(By.name("password"));
@@ -44,7 +46,7 @@ class TestCases {
 		pword.sendKeys("password");
 		submit.click();
 		String url = driver.getCurrentUrl();
-		System.out.print(url);
+		//System.out.print(url);
 		Assert.assertEquals(url, "http://unoblob.ddns.net:8080/groupproject/displayTable.jsp?userid=8");
 		driver.quit();
 	}
@@ -68,6 +70,44 @@ class TestCases {
 		String txt = alert.getText();
 		Assert.assertEquals(txt, "Passwords do not match");
 		alert.dismiss();
+		Thread.sleep(1000);
+		
+		uname = driver.findElement(By.id("uname"));
+		pword = driver.findElement(By.id("password"));
+		cpword = driver.findElement(By.id("cpassword"));
+		phone = driver.findElement(By.id("phone"));
+		submit = driver.findElement(By.id("submitButton"));
+		
+		uname.clear();
+		pword.clear();
+		cpword.clear();
+		phone.clear();
+		
+		uname.sendKeys("bobby");
+		pword.sendKeys("password");
+		cpword.sendKeys("password");
+		phone.sendKeys("5558675309");
+		submit.click();
+		Thread.sleep(1000);
+		txt = alert.getText();
+		Assert.assertEquals(txt, "Account successfully made, you may now log in.");
+		alert.dismiss();
+		Thread.sleep(1000);
+		
+		uname = driver.findElement(By.name("username"));
+		pword = driver.findElement(By.name("password"));
+		submit = driver.findElement(By.id("submitButton"));
+		uname.sendKeys("bobby");
+		pword.sendKeys("password");
+		submit.click();
+		Thread.sleep(1000);
+		
+		txt = driver.getCurrentUrl();
+		txt = txt.split("\\?")[0];
+		Assert.assertEquals(txt, "http://unoblob.ddns.net:8080/groupproject/displayTable.jsp");
+		
+
+		
 		driver.quit();
 		
 		
@@ -96,6 +136,35 @@ class TestCases {
 		Assert.assertEquals(txt, "Reservation is already filled!");
 		driver.quit();
 		
+	}
+	
+	@Test
+	void testAdmin() throws InterruptedException{
+		WebElement user = driver.findElement(By.id("username"));
+		WebElement pword = driver.findElement(By.id("password"));
+		WebElement submit = driver.findElement(By.id("submitButton"));
+		user.sendKeys("admin");
+		pword.sendKeys("password");
+		submit.click();
+		Thread.sleep(1000);
+		String url = driver.getCurrentUrl();
+		Assert.assertEquals(url, "http://unoblob.ddns.net:8080/groupproject/Admin.jsp");
+		
+		WebElement table = driver.findElement(By.id("AdminTable"));
+		table.click();
+		Thread.sleep(1000);
+		
+		WebElement btn = driver.findElement(By.id("TableEdit"));
+		btn.click();
+		Thread.sleep(1000);
+		
+		WebElement time = driver.findElement(By.id("four"));
+		time.sendKeys("3");
+		btn = driver.findElement(By.id("submitButton"));
+		btn.click(); 
+		
+		
+		driver.quit();
 	}
 
 }
