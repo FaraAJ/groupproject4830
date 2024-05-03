@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -5,16 +6,26 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>New User Registration</title>
-	<style>
+<style>
 	.container {
 		text-align: center;
 	}
-	</style>
+	
+	body {
+			height: 100%; margin: 0;
+		}
+		
+	
+	.back {
+		background-image: url("res_back.jpg"); height: 100%; background-position: bottom; background-repeat: no-repeat; background-size: cover;
+	}
+	
+</style>
 </head>
 <body>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+<div class = "back" >
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
     $(document).ready(function() {
         const ServletURL = "${pageContext.request.contextPath}/Register";
 
@@ -75,5 +86,6 @@
 		</form>
 	</div>
  </form>
+</div>
 </body>
 </html>
