@@ -110,7 +110,7 @@ public class AdminTable extends HttpServlet {
 	    			  
 	    		  }
 		    
-	    		  response.getWriter().append("<a id=\"TableEdit\" href=\"AdminTableEdit.jsp\"><button>EDIT</button></a><br><br>");
+	    		  response.getWriter().append("<a id=\"TableEdit"+ Integer.toString(xx) + "\" href=\"AdminTableEdit.jsp\"><button>EDIT</button></a><br><br>");
 	    		  response.getWriter().append("</div>");
 	    	
 	    	  }

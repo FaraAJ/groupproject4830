@@ -77,6 +77,7 @@
         </tr>
     </thead>
     <tbody id="tablebody">
+    	<tr><td>loading...</td></tr>
     </tbody>
 </table>
 

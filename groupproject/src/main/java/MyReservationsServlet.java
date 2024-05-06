@@ -51,27 +51,29 @@ public class MyReservationsServlet extends HttpServlet {
             StringBuilder returnString = new StringBuilder();
             
             // Construct table header row
-            returnString.append("<tr>");
+            /*returnString.append("<tr>");
             returnString.append("<th>Day</th>");
             returnString.append("<th>Time</th>");
-            returnString.append("</tr>");
+            returnString.append("</tr>");*/
 
             // Iterate through tables, days, and times
             for (String table : tables) {
                 for (String day : days) {
                     for (String time : times) {
-                    	preparedStatement = connection.prepareStatement("SELECT * FROM " + table + " WHERE day = '" + day + "' AND `" + time + "` = '" + userid + "'");
+                    	preparedStatement = connection.prepareStatement("SELECT * FROM " + table + " WHERE day = '" + day + "' AND `" + time + "` like " + userid);
+                    	//System.out.print(preparedStatement);
                         resultSet = preparedStatement.executeQuery();
                         
                         
                         // Process the resultSet here and append to returnString
                         while (resultSet.next()) {
-                            String dayValue = resultSet.getString(day);
-                            String timeValue = resultSet.getString(time);
-
+                            //String dayValue = resultSet.getString("day");
+                            //String timeValue = resultSet.getString(time);
+                            //System.out.println(dayValue + ',' + timeValue);
                             returnString.append("<tr>");
-                            returnString.append("<td>").append(dayValue).append("</td>");
-                            returnString.append("<td>").append(timeValue).append("</td>");
+                            returnString.append("<td>").append(table).append("</td>");
+                            returnString.append("<td>").append(day).append("</td>");
+                            returnString.append("<td>").append(time).append("</td>");
                             returnString.append("</tr>");
                         }
                     }  

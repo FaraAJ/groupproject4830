@@ -15,13 +15,13 @@ class TestCases {
 	public void setUp() throws Exception{
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		driver.get("unoblob.ddns.net:8080/groupproject");
+		driver.get("http://unoblob.ddns.net:8080/groupproject");
 
 		
 	}
 	
 	@Test
-	void testLogin() throws InterruptedException {
+	void testBadLogin() throws InterruptedException {
 		WebElement user = driver.findElement(By.name("username"));
 		WebElement pword = driver.findElement(By.name("password"));
 		WebElement submit = driver.findElement(By.id("submitButton"));
@@ -34,14 +34,13 @@ class TestCases {
 		String txt = alert.getText();
 		Assert.assertEquals(txt, "Bad login! Please try again.");
 		alert.dismiss();
-		Thread.sleep(1000);
-		
-		
-		
-		//driver.switchTo().defaultContent();
-		user = driver.findElement(By.name("username"));
-		pword = driver.findElement(By.name("password"));
-		submit = driver.findElement(By.id("submitButton"));
+		driver.quit();
+	}
+	@Test
+	void testGoodLogin() throws InterruptedException{
+		WebElement user = driver.findElement(By.name("username"));
+		WebElement pword = driver.findElement(By.name("password"));
+		WebElement submit = driver.findElement(By.id("submitButton"));
 		user.sendKeys("user1");
 		pword.sendKeys("password");
 		submit.click();
@@ -148,13 +147,13 @@ class TestCases {
 		submit.click();
 		Thread.sleep(1000);
 		String url = driver.getCurrentUrl();
-		Assert.assertEquals(url, "http://unoblob.ddns.net:8080/groupproject/Admin.jsp");
+		Assert.assertEquals(url, "http://http://unoblob.ddns.net:8080/groupproject/Admin.jsp");
 		
 		WebElement table = driver.findElement(By.id("AdminTable"));
 		table.click();
 		Thread.sleep(1000);
 		
-		WebElement btn = driver.findElement(By.id("TableEdit"));
+		WebElement btn = driver.findElement(By.id("TableEdit0"));
 		btn.click();
 		Thread.sleep(1000);
 		

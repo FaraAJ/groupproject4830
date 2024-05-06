@@ -100,13 +100,6 @@ public class login extends HttpServlet {
     		  response.sendRedirect("login.jsp?invalid=true");
     		  e.printStackTrace();
 	      }
-		/*if (request.getParameter("username").equals("admin")) {
-			response.getWriter().append("admin login!!");
-		}
-		else {
-			response.getWriter().append("invalid username/password");
-			response.sendRedirect("login.jsp");
-		}*/
 		
 
 	}

@@ -35,7 +35,6 @@ public class AdminUser extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 		response.setContentType("text/html;charset=UTF-8");
 	      //this gets the driver
@@ -113,7 +112,7 @@ public class AdminUser extends HttpServlet {
 	}
 	
 	public String spaceMaker(double num) {
-		System.out.println("This is num: " + num);
+		//System.out.println("This is num: " + num);
 		  String result = "";
 		  if(num % 1 != 0) {
 			  for(int x = 0; x <= num + 1; x++) {
@@ -146,7 +145,7 @@ public class AdminUser extends HttpServlet {
 			
 	        int col = preparedStatement.executeUpdate();
 	        
-	        System.out.println(col);	
+	        //System.out.println(col);	
 	        
 			preparedStatement.close();
 			
@@ -166,7 +165,7 @@ public class AdminUser extends HttpServlet {
 			
 			int row = preparedStatement.executeUpdate();
 
-			System.out.println(row);
+			//System.out.println(row);
 			
 			preparedStatement.close();
 			
